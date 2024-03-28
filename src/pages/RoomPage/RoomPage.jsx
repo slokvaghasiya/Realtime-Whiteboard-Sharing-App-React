@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import "./RoomPage.css";
 import WhiteBorad from "../../components/Whiteboard/WhiteBorad";
 
 const RoomPage = () => {
+  const canvasRef = useRef(null);
+  const ctxRef = useRef(null);
+
   const [tool, setTool] = useState("pencil");
   const [color, setColor] = useState("black");
-
-
+  const [elements, setElements] = useState([]);
 
   return (
     <div className="row">
@@ -60,8 +63,6 @@ const RoomPage = () => {
               onChange={(e) => setColor(e.target.value)}
             />
           </div>
-
-          
         </div>
         <div className="col-md-3 d-flex gap-2">
           <button className="btn btn-primary mt-1">Undo</button>
@@ -71,8 +72,14 @@ const RoomPage = () => {
           <button className="btn btn-danger">Clear Canvas</button>
         </div>
       </div>
-      <div className="col-md-10 mx-auto mt-4 canvas-box">
-        <WhiteBorad />
+      <div className="canvas-box col-md-10 mx-auto mt-4 ">
+        <WhiteBorad
+          canvasRef={canvasRef}
+          ctxRef={ctxRef}
+          elements={elements}
+          setElements={setElements}
+          tool={tool}
+        />
       </div>
     </div>
   );
