@@ -17,6 +17,7 @@ const connectionOptions = {
 const socket = io(server,connectionOptions)
 
 const App = () => {
+  
   const [user,setUser] = useState(null)
 
   const uuid = ()=>{
@@ -40,7 +41,7 @@ const App = () => {
     <div className="container">
       <Routes>
         <Route path="/" element={<Forms uuid={uuid} socket={socket} setUser={setUser} />}></Route>
-        <Route path="/:roomID" element={<RoomPage uuid={uuid} socket={socket} setUser={setUser} />} ></Route>
+        <Route path="/:roomID" element={<RoomPage user={user} socket={socket} />} ></Route>
       </Routes>
     </div>
   );
