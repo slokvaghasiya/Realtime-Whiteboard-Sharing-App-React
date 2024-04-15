@@ -1,0 +1,23 @@
+{
+  "name": "mern-realtime-whiteboard-sharing-app",
+  "version": "1.0.0",
+  "description": "This is mern for realtime whiteboard sharing app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slokvaghasiya/Realtime-Whiteboard-Sharing-App-React.git"
+  },
+  "author": "Slok Vaghasiya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/slokvaghasiya/Realtime-Whiteboard-Sharing-App-React/issues"
+  },
+  "homepage": "https://github.com/slokvaghasiya/Realtime-Whiteboard-Sharing-App-React#readme",
+  "dependencies": {
+    "socket.io": "^4.7.4"
+  }
+}
