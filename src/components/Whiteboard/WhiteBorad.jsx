@@ -14,11 +14,11 @@ const WhiteBorad = ({ canvasRef, ctxRef, elements, setElements, color, tool, use
       setImg(data.imageURL)
     })
   }, [img])
-  
+
   useEffect(() => {
     if (user?.presenter) {
       const canvas = canvasRef.current;
-      canvas.height = window.innerHeight * 2;
+      canvas.height = window.innerHeight * 0.7;
       canvas.width = window.innerWidth * 2;
       const ctx = canvas.getContext("2d");
       ctxRef.current = ctx;
@@ -55,6 +55,11 @@ const WhiteBorad = ({ canvasRef, ctxRef, elements, setElements, color, tool, use
               roughGenerator.line(element.offsetX, element.offsetY, element.width, element.height, { stroke: element.stroke, strokeWidth: 5, roughness: 0 })
             );
           }
+          else if (element.type === "circle") {
+            roughCanvas.draw(
+              roughGenerator.circle(element.offsetX, element.offsetY,100, { stroke: element.stroke, strokeWidth: 5, roughness: 0 })
+            );
+          }
         });
         const canvasImg = canvasRef.current.toDataURL();
         socket.emit("whiteboardData", canvasImg)
@@ -67,8 +72,8 @@ const WhiteBorad = ({ canvasRef, ctxRef, elements, setElements, color, tool, use
   if (!user?.presenter) {
     return (
 
-      <div className="border  border-dark border-3 h-100 w-100 overflow-hidden">
-        <img src={img} alt="White board is share by Host !" className="w-100 h-100" />
+      <div className="border border-dark bg-white border-3 h-100 w-100 overflow-hidden">
+        <img src={img} alt="White board is share by Host !" style={{ height: window.innerHeight * 0.7, width: "285%" }} />
       </div>
     )
   };
@@ -87,6 +92,11 @@ const WhiteBorad = ({ canvasRef, ctxRef, elements, setElements, color, tool, use
     } else if (tool === "rect") {
       setElements((prevElements) => [
         ...prevElements, { type: "rect", offsetX, offsetY, width: offsetX, height: offsetY, stroke: color, },
+      ]);
+    }
+     else if (tool === "circle") {
+      setElements((prevElements) => [
+        ...prevElements, { type: "circle", offsetX, offsetY, width: offsetX, height: offsetY, stroke: color, },
       ]);
     }
     setIsDrawing(true);
@@ -133,6 +143,17 @@ const WhiteBorad = ({ canvasRef, ctxRef, elements, setElements, color, tool, use
           })
         );
       }
+       else if (tool === "circle") {
+        setElements((prevElements) =>
+          prevElements.map((ele, index) => {
+            if (index === elements.length - 1) {
+              return { ...ele, width: offsetX - ele.offsetX, height: offsetY - ele.offsetY };
+            } else {
+              return ele;
+            }
+          })
+        );
+      }
     }
   };
 
@@ -143,7 +164,7 @@ const WhiteBorad = ({ canvasRef, ctxRef, elements, setElements, color, tool, use
 
   return (
     <div
-      className="border  border-dark border-3 h-100 w-100 overflow-hidden"
+      className="border bg-white border-dark border-3 h-100 w-100 overflow-hidden"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
