@@ -57,7 +57,7 @@ const WhiteBorad = ({ canvasRef, ctxRef, elements, setElements, color, tool, use
           }
           else if (element.type === "circle") {
             roughCanvas.draw(
-              roughGenerator.circle(element.offsetX, element.offsetY,100, { stroke: element.stroke, strokeWidth: 5, roughness: 0 })
+              roughGenerator.circle(element.offsetX, element.offsetY, element.diameter, { stroke: element.stroke, strokeWidth: 5, roughness: 0 })
             );
           }
         });
@@ -93,10 +93,9 @@ const WhiteBorad = ({ canvasRef, ctxRef, elements, setElements, color, tool, use
       setElements((prevElements) => [
         ...prevElements, { type: "rect", offsetX, offsetY, width: offsetX, height: offsetY, stroke: color, },
       ]);
-    }
-     else if (tool === "circle") {
+    } else if (tool === "circle") {
       setElements((prevElements) => [
-        ...prevElements, { type: "circle", offsetX, offsetY, width: offsetX, height: offsetY, stroke: color, },
+        ...prevElements, { type: "circle", offsetX, offsetY, endPosX: offsetX, endPosY: offsetY, diameter: 0, stroke: color, },
       ]);
     }
     setIsDrawing(true);
@@ -143,17 +142,20 @@ const WhiteBorad = ({ canvasRef, ctxRef, elements, setElements, color, tool, use
           })
         );
       }
-       else if (tool === "circle") {
+      else if (tool === "circle") {
         setElements((prevElements) =>
-          prevElements.map((ele, index) => {
+        prevElements.map((ele, index) => {
+            let diameter = Math.sqrt(Math.pow(offsetX - ele.offsetX, 2) + Math.pow(offsetY - ele.offsetY, 2)) * 2
             if (index === elements.length - 1) {
-              return { ...ele, width: offsetX - ele.offsetX, height: offsetY - ele.offsetY };
+              return { ...ele, endPosX: offsetX - ele.offsetX, endPosY: offsetY - ele.offsetY,diameter:diameter };
             } else {
               return ele;
             }
           })
         );
-      }
+        // setEndPos({ x, y });
+        // setDiameter(Math.sqrt(Math.pow(x - startPos.x, 2) + Math.pow(y - startPos.y, 2)) * 2);
+      };
     }
   };
 
