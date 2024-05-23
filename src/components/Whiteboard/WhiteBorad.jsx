@@ -73,7 +73,7 @@ const WhiteBorad = ({ canvasRef, ctxRef, elements, setElements, color, tool, use
     return (
 
       <div className="border border-dark bg-white border-3 h-100 w-100 overflow-hidden">
-        <img src={img} alt="White board is share by Host !" style={{ height: window.innerHeight * 0.7, width: "285%" }} />
+        <img src={img} alt="Wait....White board will share by Host !" style={{ height: window.innerHeight * 0.7, width: "285%" }} />
       </div>
     )
   };

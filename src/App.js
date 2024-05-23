@@ -6,7 +6,7 @@ import { toast,Bounce } from 'react-toastify';
 import Forms from "./components/Forms/form";
 import RoomPage from "./pages/RoomPage/RoomPage";
 
-const server = "http://localhost:8080";
+const server = "https://portfolio-ofyx.onrender.com";
 const connectionOptions = {
   "force new connection": true,
   reconnectionAttemps: "Infinity",
