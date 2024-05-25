@@ -1,8 +1,7 @@
 <div align='center'>
 
 <h1>Realtime-Whiteboard-Sharing-App</h1>
-<h2>Project Link: [https://github.com/slokvaghasiya/Realtime-Whiteboard-Sharing-App-React/settings/pages](https://github.com/slokvaghasiya/Realtime-Whiteboard-Sharing-App-React/settings/pages)
-</h2>
+<h2>Project Link: https://slokvaghasiya.github.io/Realtime-Whiteboard-Sharing-App-React/</h2>
 </div>
 
 
